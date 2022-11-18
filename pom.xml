@@ -26,6 +26,7 @@
         <spring-boot-starter.version>2.6.7</spring-boot-starter.version>
         <spring-boot-starter-batch.version>2.7.5</spring-boot-starter-batch.version>
         <h2-database.version>2.1.214</h2-database.version>
+        <mysql-driver.version>8.0.31</mysql-driver.version>
     </properties>
 
     <dependencyManagement>
@@ -58,16 +59,13 @@
                 <scope>runtime</scope>
                 <version>${h2-database.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql-driver.version}</version>
+                <scope>runtime</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
