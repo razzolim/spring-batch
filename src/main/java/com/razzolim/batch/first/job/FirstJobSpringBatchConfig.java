@@ -1,4 +1,4 @@
-package com.razzolim.batch.first;
+package com.razzolim.batch.first.job;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -21,32 +21,13 @@ public class FirstJobSpringBatchConfig {
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
 
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
-
     @Bean
-    public Job printsHelloJob() {
+    public Job printsHelloJob(Step printsHelloStep) {
         return jobBuilderFactory
                 .get("printsHelloJob")
-                .start(printsHelloStep())
+                .start(printsHelloStep)
                 .incrementer(new RunIdIncrementer())
                 .build();
-    }
-
-    public Step printsHelloStep() {
-        return stepBuilderFactory
-                .get("printsHelloStep")
-                .tasklet(printsHelloName(null))
-                .build();
-    }
-
-    @Bean
-    @StepScope
-    public Tasklet printsHelloName(@Value("#{jobParameters['name']}") String name) {
-        return (contribution, chunkContext) -> {
-            System.out.printf("Hello, %s!%n", name);
-            return RepeatStatus.FINISHED;
-        };
     }
 
 }
