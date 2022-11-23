@@ -1,5 +1,6 @@
 package com.razzolim.batch.multipleformat.step;
 
+import com.razzolim.batch.multipleformat.reader.FileClientTransactionReader;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemWriter;
@@ -21,7 +22,8 @@ public class MultipleFormatsFileStepConfig {
         return stepBuilderFactory
                 .get("readMultipleFormatsFileStep")
                 .chunk(1)
-                .reader(readMultipleFormatsFileReader)
+                //.reader(readMultipleFormatsFileReader)
+                .reader(new FileClientTransactionReader(readMultipleFormatsFileReader))
                 .writer(readMultipleFormatsFileWriter)
                 .build();
     }

@@ -1,11 +1,23 @@
 package com.razzolim.batch.multipleformat.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Client {
 
     private String firstName;
     private String lastName;
     private String age;
     private String email;
+    private List<Transaction> transactions = new ArrayList<>();
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -41,8 +53,8 @@ public class Client {
 
     @Override
     public String toString() {
-        return String.format("Client{firstName=%s, lastName=%s, age=%s, email=%s}",
-                firstName, lastName, age, email);
+        return String.format("Client{firstName=%s, lastName=%s, age=%s, email=%s, transactions=%s}",
+                firstName, lastName, age, email, transactions.isEmpty() ? "" : transactions);
     }
 
 }
