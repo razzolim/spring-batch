@@ -27,7 +27,7 @@ public class ValidationProcessorProcessorConfig {
 	}
 
 	private BeanValidatingItemProcessor<Cliente> beanValidateProcessor() throws Exception {
-		var processor = new BeanValidatingItemProcessor<Cliente>();
+		BeanValidatingItemProcessor processor = new BeanValidatingItemProcessor<Cliente>();
 		processor.setFilter(true);
 		processor.afterPropertiesSet();
 		return processor;

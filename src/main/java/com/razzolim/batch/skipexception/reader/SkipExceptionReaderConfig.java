@@ -36,7 +36,7 @@ public class SkipExceptionReaderConfig {
 			}
 
 			private Cliente clientRowMapper(ResultSet rs) throws SQLException {
-				var client = new Cliente();
+				Cliente client = new Cliente();
 				client.setNome(rs.getString("nome"));
 				client.setSobrenome(rs.getString("sobrenome"));
 				client.setIdade(rs.getString("idade"));

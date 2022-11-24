@@ -28,7 +28,7 @@ public class JdbcPagingReaderReaderConfig {
 
 	@Bean
 	public SqlPagingQueryProviderFactoryBean queryProvider(@Qualifier("appDataSource") DataSource ds) {
-		var queryProvider = new SqlPagingQueryProviderFactoryBean();
+		SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
 		queryProvider.setDataSource(ds);
 		queryProvider.setSelectClause("select *");
 		queryProvider.setFromClause("cliente");

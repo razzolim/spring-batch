@@ -1,25 +1,8 @@
-package com.razzolim.batch.validationprocessor.domain;
-
-import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+package com.razzolim.batch.processorscript.domain;
 
 public class Cliente {
-
-	@NotNull
-	@Size(min = 1, max = 100)
-	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Nome deve ser alfabético")
 	private String nome;
-
-	@NotNull
-	@Range(min = 18, max = 200)
 	private Integer idade;
-
-	@NotNull
-	@Size(min = 1, max = 50)
-	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", message = "Email inválido")
 	private String email;
 	
 	public String getNome() {
