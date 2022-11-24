@@ -2,6 +2,8 @@ package com.razzolim.batch.validationprocessor.processor;
 
 import com.razzolim.batch.validationprocessor.domain.Cliente;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.support.CompositeItemProcessor;
+import org.springframework.batch.item.support.builder.CompositeItemProcessorBuilder;
 import org.springframework.batch.item.validator.BeanValidatingItemProcessor;
 import org.springframework.batch.item.validator.ValidatingItemProcessor;
 import org.springframework.batch.item.validator.ValidationException;
@@ -18,9 +20,20 @@ public class ValidationProcessorProcessorConfig {
 	private Set<String> emails = new HashSet<>();
 
 	@Bean
-	public ItemProcessor<Cliente, Cliente> validationProcessor() {
-		//var processor = new BeanValidatingItemProcessor<Cliente>();
-		//processor.setFilter(true);
+	public ItemProcessor<Cliente, Cliente> validationProcessor() throws Exception {
+		return new CompositeItemProcessorBuilder<Cliente, Cliente>()
+				.delegates(beanValidateProcessor(), emailValidatingItemProcessor())
+				.build();
+	}
+
+	private BeanValidatingItemProcessor<Cliente> beanValidateProcessor() throws Exception {
+		var processor = new BeanValidatingItemProcessor<Cliente>();
+		processor.setFilter(true);
+		processor.afterPropertiesSet();
+		return processor;
+	}
+
+	private ValidatingItemProcessor<Cliente> emailValidatingItemProcessor() {
 		ValidatingItemProcessor<Cliente> processor = new ValidatingItemProcessor<>();
 		processor.setValidator(validator());
 		processor.setFilter(true); // não interrompe a execução do job...
